@@ -1,4 +1,5 @@
 @extends('layouts.app_admin')
+@include('sidebar.admin_sidebar')
 
 @section('content')
     <div class="container">
@@ -8,7 +9,8 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center">
                             <span><h5>{{ __('User List') }}</h5></span>
-                            <!-- Dynamic Search Bar -->
+
+                            <!-- Search Bar -->
                             <div class="row">
                             <div class="input-group col-5" style="display: flex; align-items: center; justify-content: flex-end;">
                                 <input class="form-control mr-sm-2" id="search-input" type="search" placeholder="Search" aria-label="Search">

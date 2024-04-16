@@ -62,6 +62,7 @@ class LoginController extends Controller
             $user = auth()->user();
             $user->generateTwoFactorCode();
             $user->notify(new TwoFactorCode());
+            return redirect()->route('verify.index');
          }
          elseif( auth()->user()->role == 2 ){
              return redirect()->route('admin_index');

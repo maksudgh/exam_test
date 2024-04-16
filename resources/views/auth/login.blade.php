@@ -7,11 +7,11 @@
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
-                @if($message = Session::get('success'))
-                <div class="alert alert-success ">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>{{ $message }}</strong>
-                </div>
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ $message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 @endif
 
                 @if($message = Session::get('invalid'))

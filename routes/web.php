@@ -24,6 +24,10 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
+
 //Two factor routes
 Route::get('verify/resend', 'App\Http\Controllers\Auth\TwoFactorController@resend')->name('verify.resend');
 Route::resource('verify', 'App\Http\Controllers\Auth\TwoFactorController')->only(['index', 'store']);
@@ -31,10 +35,6 @@ Route::resource('verify', 'App\Http\Controllers\Auth\TwoFactorController')->only
 //public routes
 Route::post('/checkEmail', [App\Http\Controllers\HomeController::class, 'checkEmail'])->name('checkEmail')->withoutMiddleware(['auth']);
 
-
-Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
 
 //Routes Associated with admin middlware
 Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
@@ -45,6 +45,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
 
 //Routes Associated with user middlware
 Route::group(['prefix'=>'user', 'middleware'=>['isUser','auth','twofactor']], function(){
+    
     Route::get('/profile',[UserController::class,'userProfile'])->name('userProfile');
     Route::get('/password/change', [UserController::class, 'showChangePasswordForm'])->name('passwords.change');
     Route::post('/password/change', [UserController::class, 'changePassword'])->name('changePassword');

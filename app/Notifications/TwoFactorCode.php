@@ -33,7 +33,7 @@ class TwoFactorCode extends Notification
         return (new MailMessage)
                     ->line('To authenticate, please use the following One Time Password: '.$notifiable->two_factor_code)
                     ->action('Verify Here', route('verify.index'))
-                    ->line('The code will expire in 10 minutes')
+                    ->line('The code will expire in 5 minutes')
                     ->line('Do not share this OTP with anyone. We hope to see you again soon.');
     }
 }

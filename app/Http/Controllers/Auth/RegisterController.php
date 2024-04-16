@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -83,5 +84,12 @@ class RegisterController extends Controller
             'id_file_path' => '/storage/id_verification/' . $fileName,
         ]);
 
+    }
+
+    //redirect users to login page after successfull registration
+    protected function registered($user)
+    {
+        Auth::logout();
+        return redirect()->route('login')->with('success', 'Registration successful! Please login with your credentials.');
     }
 }
